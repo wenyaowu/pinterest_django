@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body %}
+<div class="container">
+<h1>Create a new account</h1>
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <input type="submit" value='Submit' />
+</form>
+</br>
+<p>or register with:</p>
+<p>
+    <ul>
+        <li>
+            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Facebook</a>
+        </li>
+        <li>
+            <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Google</a>
+        </li>
+        <li>
+            <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Twitter</a>
+        </li>
+    </ul>
+</p>
+</div>
+{% endblock %}

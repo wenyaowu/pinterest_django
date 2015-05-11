@@ -9,5 +9,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pinterest/', include('pinterest.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'thirdauth/', include('django.contrib.auth.urls')),
+    url(r'^socialauth/', include('social.apps.django_app.urls',namespace='social')),
 )
