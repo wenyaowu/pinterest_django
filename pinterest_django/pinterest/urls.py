@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^$', views.index, name='index'),
     url(r'^create_pin/$', views.create_pin, name='create_pin'),
-    url(r'^(?P<user_id>[\d]+)/my_boards/$', views.my_boards, name='my_boards'),
+    url(r'^create_board/$', views.create_board, name='create_board'),
+    url(r'^(?P<user_id>[\d]+)/boards/$', views.boards, name='boards'),
 )

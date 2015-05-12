@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from models import Pin, Category, Board
-from forms import PinForm
+from forms import PinForm, BoardForm
 
 
 def index(request):
@@ -12,6 +12,24 @@ def index(request):
     context_dict['pins'] = pins
     return render(request, 'pinterest/index.html', context_dict)
 
+@login_required
+def create_board(request):
+
+    if request.method == 'POST':
+        form = BoardForm(request.POST)
+        user = request.user
+        if form.is_valid():
+            board = form.save(commit=False)
+            board.user = user
+            board.save()
+            return redirect('/pinterest/'+str(request.user.id)+'/boards/')
+        else:
+            print form.errors
+    else:
+        form = BoardForm()
+    context_dict = {'form': form}
+
+    return render(request, 'pinterest/create_board.html', context_dict)
 
 @login_required
 def create_pin(request):
@@ -31,8 +49,8 @@ def create_pin(request):
 
     return render(request, 'pinterest/create_pin.html', context_dict)
 
-@login_required
-def my_boards(request, user_id):
+
+def boards(request, user_id):
 
     context_dict = {}
     try:
@@ -41,8 +59,17 @@ def my_boards(request, user_id):
         pass  # Handle user doesn't exists
 
     boards = Board.objects.filter(user=user)
-    for board in boards:
-        board.pin = Pin.objects.filter(board=board)[0]  # Get the first pin in the board for preview.
-    context_dict['boards'] = boards
+    if boards:
+        for board in boards:
+            try:
+                board.pin = Pin.objects.filter(board=board)[0]  # Get the first pin in the board for preview.
+            except:
+                pass
+        context_dict['boards'] = boards
 
-    return render(request, 'pinterest/my_boards.html', context_dict)
+    return render(request, 'pinterest/boards.html', context_dict)
+
+
+def board(request):  # TODO:Create view to show pins on specific board.
+    context_dict = {}
+    return render(request, 'pinterest/board.html', context_dict)

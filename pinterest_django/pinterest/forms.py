@@ -7,7 +7,7 @@ from models import Pin, Board, Category
 class PinForm(forms.ModelForm):
 
     title = forms.CharField(max_length=256, help_text='Title: ')
-    description = forms.CharField(max_length=1024, help_text='Description: ')
+    description = forms.CharField(widget=forms.Textarea, help_text='Description: ')
     image = forms.ImageField(help_text='Upload image: ')
     category = forms.ModelChoiceField(queryset=Category.objects.all(), help_text='Choose a category: ')
     likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
@@ -19,3 +19,13 @@ class PinForm(forms.ModelForm):
     class Meta:
         model = Pin
         exclude = ('likes', )
+
+
+class BoardForm(forms.ModelForm):
+
+    title = forms.CharField(max_length=256, help_text='Title: ')
+    description = forms.CharField(widget=forms.Textarea, help_text='Description: ')
+
+    class Meta:
+        model = Board
+        exclude = ('user', 'slug', )

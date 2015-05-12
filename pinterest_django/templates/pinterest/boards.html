@@ -10,10 +10,14 @@
                 <div class="col-xs-7 col-sm-3 clear">
                     <div class="pin-container">
                         <div class="pin-image-container">
-                            <a href=""><image src={{ board.pin.image.url }}></image></a>
+                            {% if board.pin.image %}
+                            <a href=""><image src={{ board.pin.image.url }} alt='Preview'></image></a>
+                            {% else %}
+                            <a href=""><image src="/static/image/empty.jpg" alt='Preview'></image></a>
+                            {% endif %}
                         </div>
                         <div class="pin-title-container">
-                        <p class="pin-title">{{ board.title }}</p>
+                            <p class="pin-title">{{ board.title }}</p>
                         </div>
                         <div class="pin-meta-container">
                             <div class="pin-description">
@@ -28,7 +32,6 @@
                     </div>
 
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
