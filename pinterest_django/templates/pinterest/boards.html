@@ -11,9 +11,9 @@
                     <div class="pin-container">
                         <div class="pin-image-container">
                             {% if board.pin.image %}
-                            <a href=""><image src={{ board.pin.image.url }} alt='Preview'></image></a>
+                            <a href="{% url 'board' user_id board.slug %}"><image src={{ board.pin.image.url }} alt='Preview'></image></a>
                             {% else %}
-                            <a href=""><image src="/static/image/empty.jpg" alt='Preview'></image></a>
+                            <a href="{% url 'board' user_id board.slug %}"><image src="/static/image/empty.jpg" alt='Preview'></image></a>
                             {% endif %}
                         </div>
                         <div class="pin-title-container">

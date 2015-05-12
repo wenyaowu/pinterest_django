@@ -53,10 +53,11 @@ def create_pin(request):
 def boards(request, user_id):
 
     context_dict = {}
+    context_dict['user_id'] = user_id
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:
-        pass  # Handle user doesn't exists
+        pass  # Handle user doesn't exist
 
     boards = Board.objects.filter(user=user)
     if boards:
@@ -70,6 +71,22 @@ def boards(request, user_id):
     return render(request, 'pinterest/boards.html', context_dict)
 
 
-def board(request):  # TODO:Create view to show pins on specific board.
+def board(request, user_id, board_slug):
+
     context_dict = {}
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        pass  # Handle user doesn't exist
+    try:
+        board = Board.objects.get(user=user, slug=board_slug)
+        context_dict['board'] = board
+    except Board.DoesNotExist:
+        pass  # Handle board doesn't exist
+    try:
+        pins = Pin.objects.filter(board=board)
+        context_dict['pins'] = pins
+    except Pin.DoesNotExist:
+        pass  # No pin in current board
+
     return render(request, 'pinterest/board.html', context_dict)
