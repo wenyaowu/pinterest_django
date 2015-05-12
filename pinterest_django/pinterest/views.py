@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from models import Pin, Category, Board
@@ -8,7 +9,7 @@ from forms import PinForm, BoardForm
 
 def index(request):
     context_dict = {}
-    pins = Pin.objects.all()[:25]
+    pins = Pin.objects.all().order_by('-id')[:25]
     context_dict['pins'] = pins
     return render(request, 'pinterest/index.html', context_dict)
 
@@ -90,3 +91,18 @@ def board(request, user_id, board_slug):
         pass  # No pin in current board
 
     return render(request, 'pinterest/board.html', context_dict)
+
+@login_required
+def like_pin(request):
+    pin_id = None
+    if request.method == 'GET':
+        pin_id = request.GET['pin_id']
+    likes = 0
+    if pin_id:
+        pin = Pin.objects.get(id=int(pin_id))
+        if pin:
+            likes = pin.likes+1
+            pin.likes = likes
+            pin.save()
+
+    return HttpResponse(likes)
