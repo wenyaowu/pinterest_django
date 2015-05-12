@@ -1,0 +1,65 @@
+body{
+   background-color: #f8f8f8;
+}
+.clear{
+    clear: none;
+}
+
+/* CSS for the pin componenet */
+.pin-container{
+  background-color: white;
+  width: 250px;
+  border: dashed black 1px;
+  margin: 10px;
+  border-radius: 15px;
+  float: left;
+}
+
+.pin-button-container{
+    position: absolute;
+    width: 250px;
+    top: 15px;
+    left: 30px;
+}
+
+button.close-button, button.close-button:hover, button.close-button:focus{
+    float: right;
+    background: transparent;
+    border: none;
+    padding: 0px;
+    margin-right: 10px;
+
+}
+
+span.close-glyphicon:hover{
+    opacity: 0.5;
+}
+
+.pin-image-container img {
+  max-height: 100%;
+  max-width: 100%;
+
+}
+
+.pin-title {
+    font-weight: bold;
+}
+
+p.pin-meta{
+    font-size: 12px;
+    color: gray;
+}
+
+.pin-meta-container, .pin-category-container, .pin-title-container{
+  padding: 5px;
+  border-top: solid gray 1px;
+}
+/* End for Pin */
+
+/* Override Nav-bar default CSS */
+.navbar-default{
+    background-color: white; !important;
+}
+.navbar{
+    margin-bottom: 0px;
+}
