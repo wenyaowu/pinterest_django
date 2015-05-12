@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+
+{% block body %}
+<div class="container">
+    <h1>Create a Pin</h1>
+        <form id="pin_form" method="post" action="/pinterest/create_pin/" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+
+            <p> {{ field.errors }}
+                <b>{{ field.help_text }}</b>
+                {{ field }} </p>
+
+            {% endfor %}
+            </br>
+            <input type="submit" name="submit" value="Create Pin" />
+        </form>
+</div>
+{% endblock %}

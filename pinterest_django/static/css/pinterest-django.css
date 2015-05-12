@@ -1,9 +1,6 @@
 body{
    background-color: #f8f8f8;
 }
-.clear{
-    clear: none;
-}
 
 /* CSS for the pin componenet */
 .pin-container{

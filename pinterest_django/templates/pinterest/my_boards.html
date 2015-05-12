@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div id="pin-masonry-container" class="js-masonry"> <!--Cascading Grid Layout using Masonry-->
+            {% for board in boards %}
+                <div class="col-xs-7 col-sm-3 clear">
+                    <div class="pin-container">
+                        <div class="pin-image-container">
+                            <a href=""><image src={{ board.pin.image.url }}></image></a>
+                        </div>
+                        <div class="pin-title-container">
+                        <p class="pin-title">{{ board.title }}</p>
+                        </div>
+                        <div class="pin-meta-container">
+                            <div class="pin-description">
+                                <p>{{ board.description }}</p>
+                            </div>
+                            <div class="pin-meta-info">
+                                <p class="pin-meta">
+                                create by {{ user }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

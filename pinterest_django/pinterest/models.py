@@ -35,7 +35,7 @@ class Pin(models.Model):
     image = models.ImageField(title)
     likes = models.IntegerField(default=0)
     category = models.ForeignKey(Category)
-    board = models.ForeignKey(Board)
+    board = models.ManyToManyField(Board)
 
     def __unicode__(self):
         return self.title
