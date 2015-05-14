@@ -1,0 +1,1 @@
+web: gunicorn pinterest_django.wsgi
