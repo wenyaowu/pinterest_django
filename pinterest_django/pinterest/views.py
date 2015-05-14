@@ -1,18 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.messages.views import SuccessMessageMixin
-from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import FormView
 
-from models import Pin, Category, Board
+
+from models import Pin, Board
 from forms import PinForm, BoardForm, PinPinForm
 
 
 def index(request):
     context_dict = {}
-    pins = Pin.objects.all().order_by('-id', 'title').distinct('id', 'title')[:25]
+    pins = Pin.objects.filter(repin=False)[:25]
     context_dict['pins'] = pins
     return render(request, 'pinterest/index.html', context_dict)
 
@@ -47,7 +45,7 @@ def create_pin(request):
             print form.errors
     else:
         form = PinForm(request.user)
-        form.base_fields['board'].help_text = 'Choose a Board(s): '
+        form.base_fields['board'].help_text = '  '
 
     context_dict = {'form': form}
 
@@ -63,7 +61,7 @@ def boards(request, user_id):
     except User.DoesNotExist:
         pass  # Handle user doesn't exist
 
-    boards = Board.objects.filter(user=user)
+    boards = Board.objects.filter(user=user).order_by('-pk', 'title').distinct('pk', 'title')[:25]
     if boards:
         for board in boards:
             try:
@@ -110,6 +108,7 @@ def like_pin(request):
 
     return HttpResponse(likes)
 
+
 @login_required
 def pin_pin(request, pin_id):
     try:
@@ -118,7 +117,7 @@ def pin_pin(request, pin_id):
         pass  # Handle
 
     if request.method == 'POST':
-        form = PinPinForm(request.user, request.POST)
+        form = PinPinForm(request.user, pin_id, request.POST)
         if form.is_valid():
             pin = form.save(commit=False)
             pin.title = pin_target.title
@@ -126,39 +125,14 @@ def pin_pin(request, pin_id):
             pin.image = pin_target.image
             pin.category = pin_target.category
             pin.likes = pin_target.likes
+            pin.repin = True
             pin.save()
             form.save_m2m()  # In order to save the manytomany models.
-            return redirect('/pinterest/')
+            return redirect('/pinterest/')  # Return success to Ajax
         else:
-            print form.errors
+            print form.errors  # Return fail
     else:
-        form = PinPinForm(request.user)
+        form = PinPinForm(request.user, pin_id)
     context_dict = {'form': form, 'pin_id': pin_id}
 
     return render(request, 'pinterest/pin_pin.html', context_dict)
-
-
-class AjaxTemplateMixin(object):
-
-    def dispatch(self, request, *args, **kwargs): # Override dispatch method
-        if not hasattr(self, 'ajax_template_name'):
-            split = self.template_name.split('.html')
-            split[-1] = '_inner'
-            split.append('.html')
-            self.ajax_template_name = ''.join(split)
-        if request.is_ajax():
-            self.template_name = self.ajax_template_name
-            return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
-
-
-class PinPinFormView(SuccessMessageMixin, AjaxTemplateMixin, FormView):
-    template_name = 'pinterest/pin_pin_inner.html'
-    form_class = PinForm
-    success_url = '/pinterest/'
-    success_message = "Way to go!"
-
-    def form_valid(self, form):
-        pass
-
-    def form_invalid(self, form):
-        pass

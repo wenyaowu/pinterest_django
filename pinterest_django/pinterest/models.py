@@ -36,7 +36,10 @@ class Pin(models.Model):
     likes = models.IntegerField(default=0)
     category = models.ForeignKey(Category)
     board = models.ManyToManyField(Board)
+    repin = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.title
 
+    class Meta:
+        ordering = ['-pk']

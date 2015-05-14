@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}{% endblock %}</title>
+    <title>Pinterest-Django</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -37,6 +37,7 @@
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'boards' user.id %}">My Boards</a></li>
                 <li><a href="{% url 'create_board' %}">Create A Board</a></li>
+                <li><a href="{% url 'create_pin' %}">Add A Pin</a></li>
                 <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'auth_login' %}">Login</a></li>

@@ -7,8 +7,7 @@
 <div class="container">
     <h1>Create a Pin</h1>
         <form id="pin_form" method="post" action="/pinterest/create_pin/" enctype="multipart/form-data">
-            {% crispy form %}
-            <input type="submit" name="submit" value="Create the pin" />
+            {% crispy form form.helper %}
         </form>
 </div>
 {% endblock %}
