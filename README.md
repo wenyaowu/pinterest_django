@@ -16,7 +16,7 @@
  
 ## Requirements
 - Django 1.7+
-- [**Postgresql**](http://postgresapp.com/) 8.x or later: You can find installation tutorial [here](http://djangogirls.gitbooks.io/django-girls-tutorial-extensions/content/optional_postgresql_installation/README.html)
+- [Postgresql](http://postgresapp.com/) 8.x or later: You can find installation tutorial [here](http://djangogirls.gitbooks.io/django-girls-tutorial-extensions/content/optional_postgresql_installation/README.html)
 - [psycopg2](http://initd.org/psycopg/)
 - [python-social-auth](https://github.com/omab/python-social-auth)
 - [django-registration](https://github.com/macropin/django-registration)
