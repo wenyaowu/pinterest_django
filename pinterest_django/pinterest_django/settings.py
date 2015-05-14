@@ -40,6 +40,7 @@ DJANGO_APPS = (
 )
 
 LOCAL_APPS = (
+    'crispy_forms',
     'registration',
     'pinterest',
     'social.apps.django_app.default',
@@ -126,6 +127,9 @@ TEMPLATE_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Crispy form
+CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 # Setting for Django-registration
 REGISTRATION_OPEN = True        # If True, users can register

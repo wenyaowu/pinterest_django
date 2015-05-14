@@ -1,24 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 
 {% block body %}
 <div class="container">
     <h1>Create a Board</h1>
         <form id="board_form" method="post" action="/pinterest/create_board/">
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in form.visible_fields %}
-
-            <p> {{ field.errors }}
-                <b>{{ field.help_text }}</b>
-                {{ field }} </p>
-
-            {% endfor %}
-            </br>
-            <input type="submit" name="submit" value="Create Form" />
+            {% crispy form %}
+            <input type="submit" name="submit" value="Create the board" />
         </form>
 </div>
 {% endblock %}

@@ -30,7 +30,7 @@ class Board(models.Model):
 
 
 class Pin(models.Model):
-    title = models.CharField(max_length=256, unique=True)
+    title = models.CharField(max_length=256, unique=False)
     description = models.CharField(max_length=1024)
     image = models.ImageField(title)
     likes = models.IntegerField(default=0)

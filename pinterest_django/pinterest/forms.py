@@ -6,15 +6,15 @@ from models import Pin, Board, Category
 
 class PinForm(forms.ModelForm):
 
-    title = forms.CharField(max_length=256, help_text='Title: ')
-    description = forms.CharField(widget=forms.Textarea, help_text='Description: ')
-    image = forms.ImageField(help_text='Upload image: ')
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), help_text='Choose a category: ')
+    title = forms.CharField(max_length=256)
+    description = forms.CharField(widget=forms.Textarea)
+    image = forms.ImageField()
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
     likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
     def __init__(self, user, *args, **kwargs):  # Include user variable so we can pass it to form in view.
         super(PinForm, self).__init__(*args, **kwargs)
-        self.board = forms.ModelChoiceField(queryset=Board.objects.filter(user=user))
+        self.fields['board'].queryset = Board.objects.filter(user=user)
 
     class Meta:
         model = Pin
@@ -23,9 +23,20 @@ class PinForm(forms.ModelForm):
 
 class BoardForm(forms.ModelForm):
 
-    title = forms.CharField(max_length=256, help_text='Title: ')
-    description = forms.CharField(widget=forms.Textarea, help_text='Description: ')
+    title = forms.CharField(max_length=256)
+    description = forms.CharField(widget=forms.Textarea)
 
     class Meta:
         model = Board
         exclude = ('user', 'slug', )
+
+
+class PinPinForm(forms.ModelForm):
+
+    def __init__(self, user, *args, **kwargs):
+        super(PinPinForm, self).__init__(*args, **kwargs)
+        self.fields['board'].queryset = Board.objects.filter(user=user)
+
+    class Meta:
+        model = Pin
+        fields = ('board', )

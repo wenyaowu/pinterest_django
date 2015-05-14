@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^(?P<user_id>[\d]+)/boards/$', views.boards, name='boards'),
     url(r'^(?P<user_id>[\d]+)/boards/(?P<board_slug>[\w\-]+)/$', views.board, name='board'),
     url(r'^like_pin/$', views.like_pin, name='like_pin'),
+    url(r'^pin_pin/(?P<pin_id>[\d]+)/$', views.pin_pin, name='pin_pin')
 )

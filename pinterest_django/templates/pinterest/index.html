@@ -4,6 +4,25 @@
 
 
 {% block body %}
+<!---Pin Pin Modal-->
+ <div class="modal fade" id="form-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div id="form-modal-body" class="modal-body">
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+    <!--Pin Display-->
     <div class="container-fluid">
         <div class="row">
         <div id="pin-masonry-container" class="js-masonry"> <!--Cascading Grid Layout using Masonry-->
@@ -15,9 +34,11 @@
                             <button type="button" class="btn btn-default like-button" aria-label="Left Align" data-pinid="{{ pin.id }}">
                                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                             </button>
+                        <a data-toggle="modal" href="{% url 'pin_pin' pin.id %}" data-target="#form-modal">
                             <button type="button" class="btn btn-default pin-button" aria-label="Left Align" data-pinid="{{ pin.id }}">
                                 <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
                             </button>
+                        </a>
                             <button type="button" class="btn btn-default close-button" aria-label="Left Align" data-pinid="{{ pin.id }}">
                                 <span class="glyphicon glyphicon-remove close-glyphicon" aria-hidden="true"></span>
                             </button>
@@ -52,4 +73,6 @@
         </div>
         </div>
     </div>
+
+
 {% endblock %}

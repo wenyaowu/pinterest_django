@@ -17,3 +17,12 @@ $('button.close-button').click(function(){
     msnry.layout()
 });
 
+$('button.pin-button').click(function(){
+   var pinid;
+   pinid = $(this).attr("data-pinid")
+   $.get('/pinterest/like_pin/', {pin_id: pinid},
+   function(data){
+      $('#foo_modal').find('.modal-body').html(data);
+   });
+
+});
