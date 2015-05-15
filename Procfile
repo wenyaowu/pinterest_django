@@ -1,1 +1,1 @@
-web: gunicorn pinterest_django.wsgi
+web: sh -c "cd pinterest_django && gunicorn pinterest_django.wsgi" --log-file -
