@@ -1,3 +1,9 @@
+  $(window).load(function()
+  {
+   var container = document.querySelector('#pin-masonry-container');
+   var msnry = new Masonry( container );
+  });
+
 $('button.like-button').click(function(){
     var pinid;
     pinid = $(this).attr("data-pinid");
