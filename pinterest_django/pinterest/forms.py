@@ -27,7 +27,7 @@ class PinForm(forms.ModelForm):
 
     class Meta:
         model = Pin
-        exclude = ('likes', )
+        exclude = ('likes', 'repin')
 
 
 class BoardForm(forms.ModelForm):
