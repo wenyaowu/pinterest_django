@@ -3,7 +3,7 @@
   For this project, we are build a pinterest-like website.
   If you want to learn more about this challenge and other challenges, click [here](http://codershack.us/blog/article/amigo-with-django-challenge/)
   
-  You can find the demo of Pinterest-Django [here]()
+  You can find the demo of Pinterest-Django [here](https://pinterest-django.herokuapp.com/pinterest/)
   
 ## Overview
  - Normal Sign in & out, Sign up (Authentication)
