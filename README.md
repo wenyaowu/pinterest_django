@@ -24,4 +24,4 @@
 - [Pillow](https://pillow.readthedocs.org/)
 
 ## Blog
-You can find the blog post of this project [here]()
+You can find the blog post of this project [here](http://codershack.us/blog/article/challenge2-pinterest-with-django/)
