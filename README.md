@@ -1,7 +1,7 @@
 # Amigo with Django #2 Pinterest-Django
   Second project for my Amigo with Django Challenge. 
   For this project, we are build a pinterest-like website.
-  If you want to learn more about this challenge and other challenges, click [here](http://codershack.us/blog/article/amigo-with-django-challenge/)
+  If you want to learn more about this challenge and other projects, click [here](http://codershack.us/blog/article/amigo-with-django-challenge/)
   
   You can find the demo of Pinterest-Django [here](https://pinterest-django.herokuapp.com/pinterest/)
   
