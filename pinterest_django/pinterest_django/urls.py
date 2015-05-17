@@ -11,7 +11,12 @@ urlpatterns = patterns('',
     url(r'^pinterest/', include('pinterest.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^socialauth/', include('social.apps.django_app.urls',namespace='social')),
+
 )
+
+urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )
 
 if settings.DEBUG:
     urlpatterns += patterns(

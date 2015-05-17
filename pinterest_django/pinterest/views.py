@@ -61,7 +61,7 @@ def boards(request, user_id):
     except User.DoesNotExist:
         pass  # Handle user doesn't exist
 
-    boards = Board.objects.filter(user=user).order_by('-pk', 'title').distinct('pk', 'title')[:25]
+    boards = Board.objects.filter(user=user)[:25]
     if boards:
         for board in boards:
             try:
@@ -86,7 +86,7 @@ def board(request, user_id, board_slug):
     except Board.DoesNotExist:
         pass  # Handle board doesn't exist
     try:
-        pins = Pin.objects.filter(board=board).order_by('-id', 'title').distinct('id', 'title')[:25]
+        pins = Pin.objects.filter(board=board).filter(repin=False)[:25]
         context_dict['pins'] = pins
     except Pin.DoesNotExist:
         pass  # No pin in current board
