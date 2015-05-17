@@ -1,1 +1,1 @@
-web: sh -c "cd pinterest_django && gunicorn pinterest_django.wsgi" --log-file -
+web: sh -c "cd pinterest_django && python pinterest_django/manage.py collectstatic --noinput && gunicorn pinterest_django.wsgi" --log-file -
